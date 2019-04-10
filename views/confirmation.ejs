@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Order your pizza</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+        <h1>Order Confirmation</h1>
+    </div>
+
+    <div id="form">
+    <div id="orderdetail">
+        <h4>Your Information</h4>
+        <label>Firstname: </label><%= fname %><br />
+        <label>Lastname: </label><%= lname %><br />
+        <label>Phone: </label><%= phone %><br />
+        <label>Address: </label><%= address %><br />
+    </div>
+    <div id="orderdetail">
+        <h4>Pizza Details</h4>
+        <label>Pizza Style: </Style>: </label><%= details %><br />
+        <label>Topping: </label><%= toppings %><br />
+        <label>Quantity: </label><%= quantity %><br />
+        <label>Total Cost: </label><%= totalCost %>
+    </div>
+
+    <div id="confirmation">
+        <form action="/gettingdata" method="post">
+            <input type="hidden" name="firstname" value="<%= fname %>">
+            <input type="hidden" name="lastname" value="<%= lname %>">
+            <input type="hidden" name="phone" value="<%= phone %>">
+            <input type="hidden" name="address" value="<%= address %>">
+            <input type="hidden" name="detail" value="<%= details %>">
+            <input type="hidden" name="topping" value="<%= toppings %>">
+            <input type="hidden" name="quantity" value="<%= quantity %>">
+            <input type="hidden" name="total" value="<%= totalCost %>">
+            <input type="submit" value="Confirm" >
+            <button type="button" onclick="location.href = '';">Cancel</button>
+        </form>
+    </div>
+    </div>
+</div>
+</body>
+</html>

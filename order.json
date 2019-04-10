@@ -1,0 +1,37 @@
+{
+    "sizes" : [
+        {"size":"Small","price":10},
+        {"size":"Medium","price":12},
+        {"size":"Large","price":14}
+    ],
+    "crust" : [
+        {"type":"Original","price":0},
+        {"type":"Crunchy","price":2},
+        {"type":"Handmade","price":3}
+    ],
+    "meattopping" : [
+        {"items":"Pepperoni","price":2},
+        {"items":"Sausage","price":3},
+        {"items":"Ground Beef","price":2},
+        {"items":"Ham","price":2},
+        {"items":"Bacon","price":2},
+        {"items":"Salami","price":3},
+        {"items":"Chicken","price":2}
+    ],
+    "nonmeats" : [
+        {"items":"Cheddar","price":2},
+        {"items":"Feta","price":2},
+        {"items":"Parmesan Asiago","price":2},
+        {"items":"Hot Banana Pepper","price":1},
+        {"items":"Black Olive","price":1},
+        {"items":"Green Olive","price":1},
+        {"items":"Green Pepper","price":1},
+        {"items":"Mushroom","price":1},
+        {"items":"Pineapple","price":1},
+        {"items":"Onion","price":1},
+        {"items":"Tomatoes","price":1},
+        {"items":"Jalapeno Pepper","price":1},
+        {"items":"Spinach","price":1},
+        {"items":"Red Pepper","price":1}
+    ]
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Order your pizza</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">  
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+	<h1>ORDER YOUR PIZZA</h1>
+	</div>
+	<form id="orderInfo" method="POST" action="/">
+		<div id="form">	
+			<div id="orderdetail">
+				<h4>Choose your size</h4>
+                <% for (var i = 0; i < size.length; i++) { %>
+                    <input 	type="radio" name="size" checked="checked" value="<%= size[i].size %>" /><%= size[i].size %>(<%= size[i].price %>)
+                <% } %>
+            </div>
+
+			<div id="orderdetail">
+				<h4>Choose your crust</h4>
+                <% for (var i = 0; i < crust.length; i++) { %>
+                    <input 	type="radio" name="crust" checked="checked" value="<%= crust[i].type %>" /><%= crust[i].type %>(<%= crust[i].price %>)
+                <% } %>
+			</div>
+    
+			<div id="orderdetail">
+                <h4>Choose toopings (minimum 2 toppings)</h4>
+                <table>
+                    <tr>
+                        <td>
+                            <h5>Choose meats</h5>	
+                            <% for (var i = 0; i < meattopping.length; i++) { %>
+                                <input 	type="checkbox" name="topping" id="topping" value="<%= meattopping[i].items %>" /><%= meattopping[i].items %>(<%= meattopping[i].price %>)<br />
+                            <% } %>
+                        </td>
+                        <td>
+                            <h5>Choose non-meats</h5>	
+                            <% for (var i = 0; i < nonmeat.length; i++) { %>
+                                <input 	type="checkbox" name="topping" id="topping" value="<%= nonmeat[i].items %>" /><%= nonmeat[i].items %>(<%= nonmeat[i].price %>)<br />
+                            <% } %>
+                        </td>
+                    </tr>
+    
+                </table>
+            </div>
+          
+            <div id="orderdetail">
+                <h4>Choose your quantity</h4>
+                <label>Quantity :</label>
+                <select name="qty" id="qty">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                </select>
+            </div>
+
+			<fieldset>
+                <legend>Your Information</legend>	
+				<label for="firstname">Firstname :</label>
+                <input type="text" name="firstname" id="firstname" value="<%= firstname %>"/>
+                <% if(!firstname) { %>
+                <label id="validation">*Please fill your firstname</label>
+                <% } %>
+
+				<br />
+                    
+				<label for="lastname">Lastname :</label>
+                <input type="text" name="lastname" id="lastname" value="<%= lastname %>"/>
+                <% if(!lastname) { %>
+                <label id="validation">*Please fill your lastname</label>
+                <% } %>
+                <br />
+                
+				<label for="phone">Phone : </label>
+                <input type="text" name="phone" id="phone" value="<%= phone %>" />
+                <% if(!phone) { %>
+                    <label id="validation">*Please fill your phone number</label>
+                <% } %>
+                <% if(!result) { %>
+                    <label id="validation">*Invalid phone number</label>
+                <% } %>
+				<br />
+
+				<label for="address">Address : </label>
+                <input type="text" name="address" id="address" value="<%= address %>" />
+                <% if(!address) { %>
+                    <label id="validation">*Please fill your address</label>
+                <% } %>
+				<br />
+
+			</fieldset>
+
+			<div id="confirmation">
+				<input type="submit" value="Submit" class="submit" />	
+                <input type="reset" value="Reset" class="reset"/>
+			</div>
+		</div>
+    </form>
+    
+  
+
+</div>
+</body>
+</html>
