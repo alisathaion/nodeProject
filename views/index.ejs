@@ -5,7 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Order your pizza</title>
-    <link rel="stylesheet" type="text/css" href="./style.css">  
+    <link rel="stylesheet" type="text/css" href="./style.css">
+
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script>
+            $(function(){
+                    $( "#orderInfo" ).validate({
+                            rules: {
+                                    phone: {
+                                        required: true,
+                                        phoneUS: true
+                                    }
+                            }
+                    });
+            })
+    </script>
 </head>
 <body>
 <div id="wrapper">
@@ -30,6 +46,7 @@
     
 			<div id="orderdetail">
                 <h4>Choose toopings (minimum 2 toppings)</h4>
+                <input type="hidden" id="testNameHidden" value="No" name="testName" />
                 <table>
                     <tr>
                         <td>
@@ -47,6 +64,7 @@
                     </tr>
     
                 </table>
+                
             </div>
           
             <div id="orderdetail">
@@ -67,49 +85,42 @@
             </div>
 
 			<fieldset>
-                <legend>Your Information</legend>	
+                <legend>Your Information</legend>						
 				<label for="firstname">Firstname :</label>
-                <input type="text" name="firstname" id="firstname" value="<%= firstname %>"/>
-                <% if(!firstname) { %>
-                <label id="validation">*Please fill your firstname</label>
-                <% } %>
-
+                <input class="required" type="text" name="firstname" id="firstname" />
 				<br />
-                    
-				<label for="lastname">Lastname :</label>
-                <input type="text" name="lastname" id="lastname" value="<%= lastname %>"/>
-                <% if(!lastname) { %>
-                <label id="validation">*Please fill your lastname</label>
-                <% } %>
-                <br />
-                
-				<label for="phone">Phone : </label>
-                <input type="text" name="phone" id="phone" value="<%= phone %>" />
-                <% if(!phone) { %>
-                    <label id="validation">*Please fill your phone number</label>
-                <% } %>
-                <% if(!result) { %>
-                    <label id="validation">*Invalid phone number</label>
-                <% } %>
+						
+				<label for="lastname">Lastname :</label></td>
+				<input class="required" type="text" name="lastname" id="lastname" />
+				<br />
+				
+				<label for="phone">Phone : </label></td>
+                <input class="required number" type="text" name="phone" id="phone" />
 				<br />
 
-				<label for="address">Address : </label>
-                <input type="text" name="address" id="address" value="<%= address %>" />
-                <% if(!address) { %>
-                    <label id="validation">*Please fill your address</label>
-                <% } %>
-				<br />
-
+				<label for="address">Address : </label></td>
+                <input class="required" type="text" name="address" id="address" />
+				<br />	
 			</fieldset>
 
 			<div id="confirmation">
-				<input type="submit" value="Submit" class="submit" />	
+				<input type="submit" value="Submit" class="submit" onclick="return checkboxValidate();" />	
                 <input type="reset" value="Reset" class="reset"/>
+                <script>
+                        function checkboxValidate() {
+                            var Checked = $('input:checkbox:checked').length;
+                            var Checkboxes = $('input:checkbox').length;
+                            var UnChecked = Checkboxes - Checked;
+
+                            if(Checked < 2 ){
+                                alert("Please choose minimum 2 topping");
+                                return false;
+                            }
+                        }
+                </script>
 			</div>
 		</div>
-    </form>
-    
-  
+	</form>
 
 </div>
 </body>

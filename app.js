@@ -4,7 +4,6 @@ const serveStatic = require('serve-static');
 var objOrder= require('./order.json');
 const c = require('./calculate');
 var fs = require('fs');
-const validatePhoneNumber = require('validate-phone-number-node-js');
 
 //Initialize the Express Framework
 var app = express();
@@ -25,36 +24,15 @@ app.get('/', function(req, res){
         size : objOrder.sizes,
         crust : objOrder.crust,
         meattopping : objOrder.meattopping,
-        nonmeat : objOrder.nonmeats,
-        firstname : "",
-        lastname : "",
-        phone : "",
-        address : "",
-        result : true
+        nonmeat : objOrder.nonmeats
      });
 });
 
 
 //data from index.ejs to confirm.ejs
-app.post('/', function(req, res){
-    console.log(req.body);
-    //validation check
-    const validPhone = validatePhoneNumber.validate(req.body.phone);
-    if(!req.body.firstname || !req.body.lastname || !req.body.phone || !req.body.address || !validPhone){
+app.post('/', (req, res) => {
+    //console.log('Received a request ', req.body);
 
-            res.render('index', {
-                size : objOrder.sizes,
-                crust : objOrder.crust,
-                meattopping : objOrder.meattopping,
-                nonmeat : objOrder.nonmeats,
-                firstname : req.body.firstname,
-                lastname : req.body.lastname,
-                phone : req.body.phone,
-                address : req.body.address,
-                result : validPhone
-            });
-    }
-    
 
     var price = [];
     for(var i = 0; i < objOrder.sizes.length; i++){
@@ -100,14 +78,10 @@ app.post('/', function(req, res){
 
 });
 
-//Send to another page
 app.post('/gettingdata', function(req, res) {
-    res.send("Thank you!!! Your order is on its way... It will take approximately 30 min");
-    //read file
-    var data = fs.readFileSync("./customerInfo.json");
-    //append file
-    fs.appendFileSync("./customerInfo.json", JSON.stringify(req.body));
-    //write file
+ 
+res.send("Thank you!!! Your order is on its way... It will take approximately 30 min");
+
     fs.writeFile("./customerInfo.json",JSON.stringify(req.body),(err)=>{
         if(err){
             console.error(err);
@@ -117,16 +91,7 @@ app.post('/gettingdata', function(req, res) {
     });
 }); 
 
-// production error handler
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
 
-//localhost:8080
 app.listen(8080, () => {
     console.log("Listening on port 8080");
 });
